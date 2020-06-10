@@ -1,4 +1,4 @@
-Count shapes: 2
+Count shapes: 3
 
 Shape: ball
 Density: 1.14
@@ -9,3 +9,7 @@ Density: 2.31
 Edge 1: 1
 Edge 2: 1
 Edge 3: 1
+
+Shape: tetrahedron
+Density: 4.123
+Len side: 7

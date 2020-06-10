@@ -9,6 +9,8 @@ string get_type_shape(Shape *shape){
             return "ball";
         case Shape::PARALLELEPIPED:
             return "parallelepiped";
+        case Shape::TETRAHEDRON:
+        	return "tetrahedron";
         default:
             return "";
     }
@@ -27,6 +29,9 @@ void read(Shape *shape, ifstream *in){
 	} else if (type_shape == "parallelepiped"){
 		shape -> type_shape = Shape::PARALLELEPIPED;
 		read(&shape->_parallelepiped, in);  
+	} else if (type_shape == "tetrahedron"){
+		shape -> type_shape = Shape::TETRAHEDRON;
+		read(&shape->_tetrahedron,in);
 	}
 }
 
@@ -46,6 +51,12 @@ void read(Shape::parallelepiped *_parallelepiped, ifstream *in) {
 	_parallelepiped->edge3 = stoi(edg3);
 } 
 
+void read(Shape::tetrahedron *_tetrahedron, ifstream *in) {
+	string len_s;
+	getline(*in, len_s);
+	_tetrahedron->len_side = stoi(len_s);
+}
+
 
 void write(Shape *shape, ofstream *out){
 	string type_shape;
@@ -61,6 +72,9 @@ void write(Shape *shape, ofstream *out){
         case Shape::PARALLELEPIPED:
             write(&shape->_parallelepiped, out);
             break;
+        case Shape::TETRAHEDRON:
+        	write(&shape->_tetrahedron, out);
+        	break;
     }
 }
 
@@ -74,4 +88,7 @@ void write(Shape::parallelepiped *_parallelepiped, ofstream *out) {
     *out << "Edge 3: " << _parallelepiped->edge3 << endl;
 }
 
+void write(Shape::tetrahedron *_tetrahedron, ofstream *out) {
+	*out << "Len side: " << _tetrahedron->len_side << endl;
+}
 

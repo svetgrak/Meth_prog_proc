@@ -1,4 +1,4 @@
-2
+3
 
 ball
 1.14
@@ -9,3 +9,7 @@ parallelepiped
 1
 1
 1
+
+tetrahedron
+4.123
+7

@@ -1,4 +1,10 @@
-Count shapes: 3
+Count shapes: 4
+
+Shape: ball
+Density: 3.123
+Volume: 267.947
+Melting point: 90
+Radius: 4
 
 Shape: ball
 Density: 1.14
@@ -6,12 +12,16 @@ Volume: 33.4933
 Melting point: 90
 Radius: 2
 
-Shape: ball
-Density: 3.123
-Radius: 4
+Shape: parallelepiped
+Density: 2.31
+Volume: 6
+Melting point: 90
+Edge 1: 1
+Edge 2: 2
+Edge 3: 3
 
 Shape: tetrahedron
-Density: 4.123
-Volume: 40.4229
-Melting point: 90
-Len side: 7
+Density: 5.213
+Volume: 3.18198
+Melting point: 100
+Len side: 3

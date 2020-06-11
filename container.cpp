@@ -42,22 +42,24 @@ bool read_container(container* container_with_shapes, string filename) {
 
 	bool sort_shapes = false;
 	int count_shapes;
-	string row;
+	string row,filter_shapes;
 	string type_shapes;
 	float density;
 
 	getline(in, row);
 	count_shapes = stoi(row);
-
 	getline(in, row);
 	if (row == "Sort") {
 		sort_shapes = true;
 	}
-
-	for (int i = 0; i < count_shapes; i++) {
-		Shape* shape = new Shape();
+	
+	getline(in,filter_shapes);
+	for (int i = 0; i < count_shapes; i++){
+		Shape *shape = new Shape();
 		read(shape, &in);
-		add(container_with_shapes, shape);
+		if (filter_shapes == "All" or filter_shapes == get_type_shape(shape)){
+			add(container_with_shapes,shape);	
+		}
 	}
 
 	if (sort_shapes) {

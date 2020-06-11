@@ -4,8 +4,6 @@ Shape: ball
 Density: 1.14
 Radius: 2
 
-Shape: parallelepiped
-Density: 2.31
-Edge 1: 1
-Edge 2: 1
-Edge 3: 1
+Shape: ball
+Density: 3.123
+Radius: 4

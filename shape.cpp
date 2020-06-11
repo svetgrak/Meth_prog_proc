@@ -19,7 +19,7 @@ void read(Shape *shape, ifstream *in){
 	getline(*in, row);              
     getline(*in, type_shape);   
 	getline(*in, densit);
-	shape->density = stof(densit);   
+	shape->density = stof(densit);
     
     if (type_shape == "ball"){
     	shape -> type_shape = Shape::BALL;

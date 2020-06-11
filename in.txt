@@ -3,14 +3,17 @@ No sort
 
 ball
 1.14
+90
 2
 
 parallelepiped
 2.31
+90
 1
 2
 3
 
 tetrahedron
-3.123
+4.123
+90
 7

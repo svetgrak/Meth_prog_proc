@@ -29,7 +29,8 @@ struct Shape {
 	
 };
 
-string get_type_shape(Shape *shp);
+string get_type_shape(Shape *shape);
+float get_volume(Shape *shape);
 void read(Shape *shape, ifstream *in);
 void read(Shape::ball *_ball, ifstream *in);
 void read(Shape::parallelepiped *_parallelepiped, ifstream *in);

@@ -17,11 +17,13 @@ string get_type_shape(Shape *shape){
 }
 
 void read(Shape *shape, ifstream *in){
-	string row, type_shape, densit;
+	string row, type_shape, densit, melt_point;
 	getline(*in, row);              
     getline(*in, type_shape);   
 	getline(*in, densit);
-	shape->density = stof(densit);   
+	getline(*in, melt_point);
+	shape->density = stof(densit);  
+	shape->melting_point = stoi(melt_point);
     
     if (type_shape == "ball"){
     	shape -> type_shape = Shape::BALL;
@@ -64,6 +66,7 @@ void write(Shape *shape, ofstream *out){
     *out << endl; 
     *out << "Shape: " << get_type_shape(shape) << endl;
     *out << "Density: " << shape->density << endl;
+    *out << "Melting point: " <<shape->melting_point << endl;
     
     switch (shape->type_shape) {
         case Shape::BALL:

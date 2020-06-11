@@ -10,7 +10,7 @@ struct Shape {
 	Shape() = default;
 	typeShape type_shape;
 	float density; // общий параметр для всех типов - плотность материала
-	
+	int melting_point;
 	
 	// шар - целочисленный радиус
 	struct ball{

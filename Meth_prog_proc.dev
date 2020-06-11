@@ -1,6 +1,6 @@
 [Project]
-FileName=Lab1_proc.dev
-Name=Lab1_proc
+FileName=Meth_prog_proc.dev
+Name=Meth_prog_proc
 Type=1
 Ver=2
 ObjFiles=
@@ -19,7 +19,7 @@ ObjectOutput=
 LogOutput=
 LogOutputEnabled=0
 OverrideOutput=0
-OverrideOutputName=Lab1_proc.exe
+OverrideOutputName=Meth_prog_proc.exe
 HostApplication=
 UseCustomMakefile=0
 CustomMakefile=

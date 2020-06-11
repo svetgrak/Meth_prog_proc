@@ -2,14 +2,17 @@ Count shapes: 3
 
 Shape: ball
 Density: 1.14
+Volume: 33.4933
 Radius: 2
 
 Shape: parallelepiped
 Density: 2.31
+Volume: 6
 Edge 1: 1
-Edge 2: 1
-Edge 3: 1
+Edge 2: 2
+Edge 3: 3
 
 Shape: tetrahedron
-Density: 4.123
+Density: 3.123
+Volume: 40.4229
 Len side: 7

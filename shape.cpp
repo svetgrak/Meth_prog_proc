@@ -1,6 +1,7 @@
 #include <fstream>
+#include <string>
 #include "shape.h"
-
+#include <math.h>
 using std::endl;
 
 string get_type_shape(Shape *shape){
@@ -15,6 +16,19 @@ string get_type_shape(Shape *shape){
             return "";
     }
 }
+
+float get_volume(Shape* shape) {
+
+	switch (shape->type_shape) {
+		case Shape::BALL:
+			return 3.14 * 4 * pow(shape->_ball.radius, 3) / 3  ;
+		case Shape::PARALLELEPIPED:
+			return shape->_parallelepiped.edge1 * shape->_parallelepiped.edge2 * shape->_parallelepiped.edge3;
+		case Shape::TETRAHEDRON:
+			return pow(2,0.5)/12*pow(shape->_tetrahedron.len_side,3);
+	}
+}
+
 
 void read(Shape *shape, ifstream *in){
 	string row, type_shape, densit;
@@ -64,7 +78,7 @@ void write(Shape *shape, ofstream *out){
     *out << endl; 
     *out << "Shape: " << get_type_shape(shape) << endl;
     *out << "Density: " << shape->density << endl;
-    
+    *out << "Volume: " << get_volume(shape) << endl;
     switch (shape->type_shape) {
         case Shape::BALL:
             write(&shape->_ball, out);
@@ -76,6 +90,7 @@ void write(Shape *shape, ofstream *out){
         	write(&shape->_tetrahedron, out);
         	break;
     }
+    
 }
 
 void write(Shape::ball *_ball, ofstream *out) {
@@ -91,4 +106,5 @@ void write(Shape::parallelepiped *_parallelepiped, ofstream *out) {
 void write(Shape::tetrahedron *_tetrahedron, ofstream *out) {
 	*out << "Len side: " << _tetrahedron->len_side << endl;
 }
+
 

@@ -6,11 +6,11 @@ using std::ofstream;
 
 struct Shape {
 	
-	enum typeShape{BALL, PARALLELEPIPED, TETRAHEDRON};	// тип возможной фигуры - шар или параллелепипед
+	enum typeShape{BALL, PARALLELEPIPED, TETRAHEDRON};
 	Shape() = default;
 	typeShape type_shape;
 	float density; // общий параметр для всех типов - плотность материала
-	
+	float volume; // объем
 	
 	// шар - целочисленный радиус
 	struct ball{

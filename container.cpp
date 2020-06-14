@@ -46,20 +46,32 @@ bool read_container(container* container_with_shapes, string filename) {
 	string type_shapes;
 	float density;
 
-	getline(in, row);
+	getline(in, row); // проверка на вводимое число
+	if (check_int(row) != true){
+		return false;
+	}
 	count_shapes = stoi(row);
-	getline(in, row);
+	getline(in, row); 
 	if (row == "Sort") {
 		sort_shapes = true;
+	} else if (row != "No sort") {
+		return false;
 	}
 	
-	getline(in,filter_shapes);
-	for (int i = 0; i < count_shapes; i++){
-		Shape *shape = new Shape();
-		read(shape, &in);
-		if (filter_shapes == "All" or filter_shapes == get_type_shape(shape)){
-			add(container_with_shapes,shape);	
+	getline(in,filter_shapes); 
+	
+	if (filter_shapes == "All" or filter_shapes == "ball" or filter_shapes == "parallelepiped" or filter_shapes == "tetrahedron"){
+		for (int i = 0; i < count_shapes; i++){
+			Shape *shape = new Shape();
+			if (read(shape, &in)!= true){
+				return false;
+			}
+			if (filter_shapes == "All" or filter_shapes == get_type_shape(shape)){
+				add(container_with_shapes,shape);	
+			}
 		}
+	} else{
+		return false;
 	}
 
 	if (sort_shapes) {

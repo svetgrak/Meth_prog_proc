@@ -4,6 +4,27 @@
 #include <math.h>
 using std::endl;
 
+
+bool check_int(string row){
+	try{
+    	int i;
+    	i = stoi(row);
+  	}catch(...){
+    	return false;
+  	}
+  	return true;
+}
+
+bool check_float(string row){
+	try{
+    	float i;
+    	i = stof(row);
+  	}catch(...){
+    	return false;
+  	}
+  	return true;
+}
+
 string get_type_shape(Shape *shape){
 	switch (shape->type_shape) {
         case Shape::BALL:
@@ -30,12 +51,22 @@ float get_volume(Shape* shape) {
 }
 
 
-void read(Shape *shape, ifstream *in){
+bool read(Shape *shape, ifstream *in){
 	string row, type_shape, densit, melt_point;
-	getline(*in, row);              
-    getline(*in, type_shape);   
+	getline(*in, row);             
+    getline(*in, type_shape); 
 	getline(*in, densit);
-	getline(*in, melt_point);
+	getline(*in, melt_point); 
+	
+	if (check_float(densit)!= true){
+		return false;
+	}
+	
+	if (check_int(melt_point) != true){
+		return false;
+	}
+	
+	
 	shape->density = stof(densit);  
 	shape->melting_point = stoi(melt_point);
     
@@ -48,29 +79,46 @@ void read(Shape *shape, ifstream *in){
 	} else if (type_shape == "tetrahedron"){
 		shape -> type_shape = Shape::TETRAHEDRON;
 		read(&shape->_tetrahedron,in);
+	} else{
+		return false;
 	}
+	return true; 
 }
 
-void read(Shape::ball *_ball, ifstream *in){
+bool read(Shape::ball *_ball, ifstream *in){
 	string rad;
 	getline(*in, rad); 
+	if (check_int(rad)!= true){
+		return false;
+	}
 	_ball->radius = stoi(rad);
+	return true;
 } 
 
-void read(Shape::parallelepiped *_parallelepiped, ifstream *in) {
+bool read(Shape::parallelepiped *_parallelepiped, ifstream *in) {
 	string edg1,edg2,edg3;
-	getline(*in, edg1);
-	getline(*in, edg2);
+	getline(*in, edg1); 
+	getline(*in, edg2); 
 	getline(*in, edg3); 
+	
+	if (check_float(edg1)!= true and check_float(edg2)!= true and check_float(edg3)!= true){
+		return false;
+	}
+	
 	_parallelepiped->edge1 = stoi(edg1);
 	_parallelepiped->edge2 = stoi(edg2);
 	_parallelepiped->edge3 = stoi(edg3);
+	return true; 
 } 
 
-void read(Shape::tetrahedron *_tetrahedron, ifstream *in) {
+bool read(Shape::tetrahedron *_tetrahedron, ifstream *in) {
 	string len_s;
-	getline(*in, len_s);
+	getline(*in, len_s); 
+	if (check_int(len_s)!=true){
+		return false;
+	}
 	_tetrahedron->len_side = stoi(len_s);
+	return true; 
 }
 
 

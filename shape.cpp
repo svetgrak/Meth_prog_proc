@@ -26,13 +26,13 @@ bool check_float(string row){
 }
 
 string get_type_shape(Shape *shape){
-	switch (shape->type_shape) {
+	switch (shape -> type_shape) {
         case Shape::BALL:
-            return "ball";
+            return "Ball";
         case Shape::PARALLELEPIPED:
-            return "parallelepiped";
+            return "Parallelepiped";
         case Shape::TETRAHEDRON:
-        	return "tetrahedron";
+        	return "Tetrahedron";
         default:
             return "";
     }
@@ -40,13 +40,13 @@ string get_type_shape(Shape *shape){
 
 float get_volume(Shape* shape) {
 
-	switch (shape->type_shape) {
+	switch (shape -> type_shape) {
 		case Shape::BALL:
-			return 3.14 * 4 * pow(shape->_ball.radius, 3) / 3  ;
+			return 3.14 * 4 * pow(shape -> ball.radius, 3) / 3  ;
 		case Shape::PARALLELEPIPED:
-			return shape->_parallelepiped.edge1 * shape->_parallelepiped.edge2 * shape->_parallelepiped.edge3;
+			return shape -> parallelepiped.edge1 * shape -> parallelepiped.edge2 * shape -> parallelepiped.edge3;
 		case Shape::TETRAHEDRON:
-			return pow(2,0.5)/12*pow(shape->_tetrahedron.len_side,3);
+			return pow(2, 0.5) / 12 * pow(shape -> tetrahedron.len_side, 3);
 	}
 }
 
@@ -58,7 +58,7 @@ bool read(Shape *shape, ifstream *in){
 	getline(*in, densit);
 	getline(*in, melt_point); 
 	
-	if (check_float(densit)!= true){
+	if (check_float(densit) != true){
 		return false;
 	}
 	
@@ -67,57 +67,57 @@ bool read(Shape *shape, ifstream *in){
 	}
 	
 	
-	shape->density = stof(densit);  
-	shape->melting_point = stoi(melt_point);
+	shape -> density = stof(densit);  
+	shape -> melting_point = stoi(melt_point);
     
-    if (type_shape == "ball"){
+    if (type_shape == "Ball"){
     	shape -> type_shape = Shape::BALL;
-    	read(&shape->_ball, in);    	
-	} else if (type_shape == "parallelepiped"){
+    	read(&shape -> ball, in);    	
+	} else if (type_shape == "Parallelepiped"){
 		shape -> type_shape = Shape::PARALLELEPIPED;
-		read(&shape->_parallelepiped, in);  
-	} else if (type_shape == "tetrahedron"){
+		read(&shape -> parallelepiped, in);  
+	} else if (type_shape == "Tetrahedron"){
 		shape -> type_shape = Shape::TETRAHEDRON;
-		read(&shape->_tetrahedron,in);
+		read(&shape -> tetrahedron, in);
 	} else{
 		return false;
 	}
 	return true; 
 }
 
-bool read(Shape::ball *_ball, ifstream *in){
+bool read(Shape::Ball *ball, ifstream *in){
 	string rad;
 	getline(*in, rad); 
-	if (check_int(rad)!= true){
+	if (check_int(rad) != true){
 		return false;
 	}
-	_ball->radius = stoi(rad);
+	ball -> radius = stoi(rad);
 	return true;
 } 
 
-bool read(Shape::parallelepiped *_parallelepiped, ifstream *in) {
+bool read(Shape::Parallelepiped *parallelepiped, ifstream *in) {
 	string edg1,edg2,edg3;
 	getline(*in, edg1); 
 	getline(*in, edg2); 
 	getline(*in, edg3); 
 	
-	if (check_float(edg1)!= true and check_float(edg2)!= true and check_float(edg3)!= true){
+	if (check_float(edg1) != true and check_float(edg2) != true and check_float(edg3) != true){
 		return false;
 	}
 	
-	_parallelepiped->edge1 = stoi(edg1);
-	_parallelepiped->edge2 = stoi(edg2);
-	_parallelepiped->edge3 = stoi(edg3);
+	parallelepiped -> edge1 = stoi(edg1);
+	parallelepiped -> edge2 = stoi(edg2);
+	parallelepiped -> edge3 = stoi(edg3);
 	return true; 
 } 
 
-bool read(Shape::tetrahedron *_tetrahedron, ifstream *in) {
+bool read(Shape::Tetrahedron *tetrahedron, ifstream *in) {
 	string len_s;
 	getline(*in, len_s); 
-	if (check_int(len_s)!=true){
+	if (check_int(len_s) != true){
 		return false;
 	}
-	_tetrahedron->len_side = stoi(len_s);
+	tetrahedron -> len_side = stoi(len_s);
 	return true; 
 }
 
@@ -127,36 +127,36 @@ void write(Shape *shape, ofstream *out){
 
     *out << endl; 
     *out << "Shape: " << get_type_shape(shape) << endl;
-    *out << "Density: " << shape->density << endl;
+    *out << "Density: " << shape -> density << endl;
     *out << "Volume: " << get_volume(shape) << endl;
-    *out << "Melting point: " <<shape->melting_point << endl;
+    *out << "Melting point: " << shape -> melting_point << endl;
     
-    switch (shape->type_shape) {
+    switch (shape -> type_shape){
         case Shape::BALL:
-            write(&shape->_ball, out);
+            write(&shape -> ball, out);
             break;
         case Shape::PARALLELEPIPED:
-            write(&shape->_parallelepiped, out);
+            write(&shape -> parallelepiped, out);
             break;
         case Shape::TETRAHEDRON:
-        	write(&shape->_tetrahedron, out);
+        	write(&shape -> tetrahedron, out);
         	break;
     }
     
 }
 
-void write(Shape::ball *_ball, ofstream *out) {
-    *out << "Radius: " << _ball->radius<< endl;
+void write(Shape::Ball *ball, ofstream *out) {
+    *out << "Radius: " << ball -> radius << endl;
 }
 
-void write(Shape::parallelepiped *_parallelepiped, ofstream *out) {
-    *out << "Edge 1: " << _parallelepiped->edge1 << endl;
-    *out << "Edge 2: " << _parallelepiped->edge2 << endl;
-    *out << "Edge 3: " << _parallelepiped->edge3 << endl;
+void write(Shape::Parallelepiped *parallelepiped, ofstream *out) {
+    *out << "Edge 1: " << parallelepiped -> edge1 << endl;
+    *out << "Edge 2: " << parallelepiped -> edge2 << endl;
+    *out << "Edge 3: " << parallelepiped -> edge3 << endl;
 }
 
-void write(Shape::tetrahedron *_tetrahedron, ofstream *out) {
-	*out << "Len side: " << _tetrahedron->len_side << endl;
+void write(Shape::Tetrahedron *tetrahedron, ofstream *out) {
+	*out << "Len side: " << tetrahedron->len_side << endl;
 }
 
 

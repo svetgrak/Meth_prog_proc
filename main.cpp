@@ -24,7 +24,7 @@ int main(int argc, char* argv[]) {
 	
 	string output = argv[2];
 	bool is_success_write = write_container(container_with_shapes, output);
-	if (!is_success_write) {
+	if (!is_success_write){
         cout << "Failed write." << endl;
         return -1;
     }

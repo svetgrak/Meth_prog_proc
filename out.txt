@@ -1,27 +1,26 @@
-Count shapes: 4
+Count shapes: 3
 
-Shape: tetrahedron
-Density: 5.213
-Volume: 85.9135
+Shape: Ball
+Density: 1.231
+Volume: 113.04
 Melting point: 100
-Len side: 9
+Radius: 3
 
-Shape: ball
-Density: 1.23
-Volume: 33.4933
-Melting point: 90
-Radius: 2
-
-Shape: parallelepiped
-Density: 2.123
+Shape: Parallelepiped
+Density: 2.31
 Volume: 6
-Melting point: 90
+Melting point: 100
 Edge 1: 1
 Edge 2: 2
 Edge 3: 3
 
-Shape: ball
+Shape: Tetrahedron
 Density: 3.123
-Volume: 4.18667
-Melting point: 90
-Radius: 1
+Volume: 40.4229
+Melting point: 100
+Len side: 7
+
+Result multimethod: 
+BALL and PARALLELEPIPED
+BALL and TETRAHEDRON
+PARALLELEPIPED and TETRAHEDRON

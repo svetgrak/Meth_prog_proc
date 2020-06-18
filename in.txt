@@ -1,25 +1,21 @@
-4
-Sort
+3
+No sort
 All
 
-ball
-1.23
-90
-2
+Ball
+1.231
+100
+3
 
-parallelepiped
-2.123
-90
+Parallelepiped
+2.31
+100
 1
 2
 3
 
-ball
+Tetrahedron
 3.123
-90
-1
-
-tetrahedron
-5.213
 100
-9
+7
+

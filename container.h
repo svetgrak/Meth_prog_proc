@@ -18,4 +18,5 @@ void add(container *container_with_shapes, Shape *shape);
 bool read_container(container *container_with_shapes, string filename);
 bool write_container(container *container_with_shapes, string filename);
 void sort(container *container_with_shapes);
+void multimethod(container *container_with_shapes, ofstream *out);
 

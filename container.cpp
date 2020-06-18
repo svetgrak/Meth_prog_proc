@@ -46,10 +46,11 @@ bool read_container(container* container_with_shapes, string filename) {
 	string type_shapes;
 	float density;
 
-	getline(in, row); // проверка на вводимое число
+	getline(in, row); 
 	if (check_int(row) != true){
 		return false;
 	}
+	
 	count_shapes = stoi(row);
 	getline(in, row); 
 	if (row == "Sort") {
@@ -73,7 +74,7 @@ bool read_container(container* container_with_shapes, string filename) {
 	} else{
 		return false;
 	}
-
+	
 	if (sort_shapes) {
 		sort(container_with_shapes);
 	}
@@ -98,7 +99,9 @@ bool write_container(container* container_with_shapes, string filename) {
 		write(shape_item -> shape, &out);
 		shape_item = shape_item -> next;
 	}
-
+	
+	multimethod(container_with_shapes, &out);
+	
 	out.close();
 	return true;
 
@@ -113,6 +116,74 @@ void sort(container* container_with_shapes) {
 		}
 	}
 }
+
+void multimethod(container *container_with_shapes, ofstream *out){
+	*out << endl ;
+	*out << "Result multimethod: " << endl ;
+	if (!container_with_shapes->size){
+		return;
+	}
+	
+	for (item* shape_item_1 = container_with_shapes->first; shape_item_1->next; shape_item_1 = shape_item_1->next) {
+		for (item* shape_item_2 = shape_item_1->next; shape_item_2; shape_item_2 = shape_item_2->next){
+			switch (shape_item_1->shape->type_shape){
+				case Shape::type::BALL:
+					switch (shape_item_2->shape->type_shape){
+						case Shape::type::BALL:
+							*out << "BALL and BALL" << endl;
+							break;
+						case Shape::type::PARALLELEPIPED:
+							*out << "BALL and PARALLELEPIPED" << endl;
+							break;
+						case Shape::type::TETRAHEDRON:
+							*out << "BALL and TETRAHEDRON" << endl;
+							break;
+						default:
+							*out << "BALL and unknown type" << endl;
+							break;
+					}
+					break;
+				case Shape::type::PARALLELEPIPED:
+					switch (shape_item_2->shape->type_shape){
+						case Shape::type::BALL:
+							*out << "PARALLELEPIPED and BALL" << endl;
+							break;
+						case Shape::type::PARALLELEPIPED:
+							*out << "PARALLELEPIPED and PARALLELEPIPED" << endl;
+							break;
+						case Shape::type::TETRAHEDRON:
+							*out << "PARALLELEPIPED and TETRAHEDRON" << endl;
+							break;
+						default:
+							*out << "PARALLELEPIPED and unknown type" << endl;
+							break;
+					}
+					break;
+				case Shape::type::TETRAHEDRON:
+					switch (shape_item_2->shape->type_shape){
+						case Shape::type::BALL:
+							*out << "TETRAHEDRON and BALL" << endl;
+							break;
+						case Shape::type::PARALLELEPIPED:
+							*out << "TETRAHEDRON and PARALLELEPIPED" << endl;
+							break;
+						case Shape::type::TETRAHEDRON:
+							*out << "TETRAHEDRON and TETRAHEDRON" << endl;
+							break;
+						default:
+							*out << "TETRAHEDRON and unknown type" << endl;
+							break;
+					}
+					break;
+				default:
+					*out << "unknown types" << endl;
+					break;
+			}
+		}	
+	}
+	
+} 
+
 
 
 

@@ -50,7 +50,6 @@ float get_volume(Shape* shape) {
 	}
 }
 
-
 bool read(Shape *shape, ifstream *in){
 	string row, type_shape, densit, melt_point;
 	getline(*in, row);             
@@ -66,10 +65,9 @@ bool read(Shape *shape, ifstream *in){
 		return false;
 	}
 	
-	
 	shape -> density = stof(densit);  
 	shape -> melting_point = stoi(melt_point);
-    
+
     if (type_shape == "Ball"){
     	shape -> type_shape = Shape::BALL;
     	read(&shape -> ball, in);    	

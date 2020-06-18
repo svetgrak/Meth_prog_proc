@@ -72,11 +72,56 @@ bool write_container(container *container_with_shapes, string filename){
 		shape_item = shape_item->next;
 	}
 	
+	multimethod(container_with_shapes, &out);
+	
 	out.close();
 	return true;
 	
 }
 
-
+void multimethod(container *container_with_shapes, ofstream *out){
+	
+	*out << "Result multimethod: " << endl;
+	if (!container_with_shapes->size){
+		return;
+	}
+	
+	for (item* shape_item_1 = container_with_shapes->first; shape_item_1->next; shape_item_1 = shape_item_1->next) {
+		for (item* shape_item_2 = shape_item_1->next; shape_item_2; shape_item_2 = shape_item_2->next){
+			switch (shape_item_1->shape->type_shape){
+				case Shape::typeShape::BALL:
+					switch (shape_item_2->shape->type_shape){
+						case Shape::typeShape::BALL:
+							*out << "BALL and BALL" << endl;
+							break;
+						case Shape::typeShape::PARALLELEPIPED:
+							*out << "BALL and PARALLELEPIPED" << endl;
+							break;
+						default:
+							*out << "BALL and unknown type" << endl;
+							break;
+					}
+					break;
+				case Shape::typeShape::PARALLELEPIPED:
+					switch (shape_item_2->shape->type_shape){
+						case Shape::typeShape::BALL:
+							*out << "PARALLELEPIPED and BALL" << endl;
+							break;
+						case Shape::typeShape::PARALLELEPIPED:
+							*out << "PARALLELEPIPED and PARALLELEPIPED" << endl;
+							break;
+						default:
+							*out << "PARALLELEPIPED and unknown type" << endl;
+							break;
+					}
+					break;
+				default:
+					*out << "unknown types" << endl;
+					break;
+			}
+		}	
+	}
+	
+} 
 
 

@@ -22,6 +22,7 @@ int main(int argc, char* argv[]) {
 		return -1;
 	}
 	
+	
 	string output = argv[2];
 	bool is_success_write = write_container(container_with_shapes, output);
 	if (!is_success_write) {
